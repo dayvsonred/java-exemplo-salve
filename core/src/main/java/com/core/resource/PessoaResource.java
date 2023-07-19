@@ -1,11 +1,8 @@
 package com.core.resource;
 
 import com.core.dto.PessoaDto;
-import com.core.dto.TaskUpdateDto;
 import com.core.entities.Pessoa;
-import com.core.entities.Task;
 import com.core.service.PessoaService;
-import com.core.service.TaskService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.UUID;
 
 @Slf4j
 @RestController
@@ -52,5 +48,12 @@ public class PessoaResource {
             @RequestBody @Valid PessoaDto pessoaDto
     ) {
         return ResponseEntity.ok(pessoaService.createNewPessoa(pessoaDto));
+    }
+
+    @PutMapping
+    public ResponseEntity<Pessoa> update(
+            @RequestBody @Valid PessoaDto pessoaDto
+    ) {
+        return ResponseEntity.ok(pessoaService.updatePessoa(pessoaDto));
     }
 }

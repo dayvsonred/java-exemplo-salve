@@ -36,7 +36,7 @@ public class Projeto implements Serializable {
     private double risco;
     private Long idgerente;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "idpessoa", referencedColumnName = "id", nullable = false)
     private List<Pessoa> membros;
 

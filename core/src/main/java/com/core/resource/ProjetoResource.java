@@ -1,11 +1,8 @@
 package com.core.resource;
 
-import com.core.dto.PessoaDto;
 import com.core.dto.ProjetoDto;
-import com.core.entities.Pessoa;
 import com.core.entities.Projeto;
 import com.core.service.ProjetoService;
-import com.core.service.TaskService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

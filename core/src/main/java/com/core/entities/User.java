@@ -1,9 +1,5 @@
 package com.core.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.RequiredArgsConstructor;
-
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,7 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "TB_USER", schema = "todo")
+@Table(name = "TB_USER", schema = "jsf")
 public class User implements Serializable {
 
 	@Id
@@ -28,7 +24,7 @@ public class User implements Serializable {
 	private String password;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "TB_USER_ROLE",  schema = "todo",
+	@JoinTable(name = "TB_USER_ROLE",  schema = "jsf",
 		joinColumns = @JoinColumn(name = "user_id"),
 		inverseJoinColumns = @JoinColumn(name = "role_id")			
 	)

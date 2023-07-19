@@ -23,5 +23,7 @@ public class Pessoa implements Serializable {
     private LocalDate datanascimento;
     private String cpf;
     private Boolean funcionario;
+    @ManyToOne
+    private Projeto projeto;
 
 }
