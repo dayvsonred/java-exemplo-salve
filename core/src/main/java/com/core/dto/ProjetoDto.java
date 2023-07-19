@@ -16,22 +16,16 @@ import java.util.List;
 @Builder
 public class ProjetoDto {
 
-    @NotNull(message = "Id may not be null")
     private Long id;
-    @NotNull(message = "nome may not be null")
-    @NotBlank(message = "nome may not be blank")
     private String nome;
     private LocalDate data_inicio;
     private LocalDate data_previsao_fim;
     private LocalDate data_fim;
     @Size( max = 50000)
     private String descricao;
-    @Size( max = 45)
     private ProjetoStatusEnum status;
     private double orcamento;
-    @Size( max = 45)
-    private double risco;
-    @NotNull(message = "idgerente may not be null")
-    private Long idgerente;
+    private String risco;
+    private Boolean idgerente;
     private List<Pessoa> membros;
 }

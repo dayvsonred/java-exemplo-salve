@@ -63,10 +63,10 @@ CREATE TABLE jsf.tb_projeto (
 	data_inicio date NULL,
 	data_previsao_fim date NULL,
 	descricao text NULL,
-	idgerente int8 NULL,
+	idgerente bool NULL,
 	nome varchar(255) NULL,
 	orcamento float8 NOT NULL,
-	risco float8 NOT NULL,
+	risco varchar(45) NULL,
 	status int4 NULL,
 	CONSTRAINT tb_projeto_pkey PRIMARY KEY (id)
 );

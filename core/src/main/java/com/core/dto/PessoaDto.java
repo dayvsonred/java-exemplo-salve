@@ -13,7 +13,6 @@ import java.time.LocalDate;
 @Builder
 public class PessoaDto {
 
-    @NotNull(message = "Id may not be null")
     private Long id;
     @NotNull(message = "nome may not be null")
     @NotBlank(message = "nome may not be blank")

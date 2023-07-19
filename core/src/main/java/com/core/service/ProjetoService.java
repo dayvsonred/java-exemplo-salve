@@ -73,7 +73,7 @@ public class ProjetoService {
             Projeto projeto = this.findById(projetoId);
             //Se um projeto foi mudado o status para iniciado, em andamento ou encerrado não pode mais ser excluído
             if(projeto.getStatus().equals(ProjetoStatusEnum.INICIADO) ||
-                    projeto.getStatus().equals(ProjetoStatusEnum.EM_ANDAMENTO) ||
+                    projeto.getStatus().equals(ProjetoStatusEnum.ANDAMENTO) ||
                     projeto.getStatus().equals(ProjetoStatusEnum.ENCERRADO)
             ){
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST,

@@ -29,12 +29,10 @@ public class Projeto implements Serializable {
     private LocalDate data_fim;
     @Column(length = 50000, columnDefinition = "TEXT")
     private String descricao;
-    @Size( max = 45)
     private ProjetoStatusEnum status;
     private double orcamento;
-    @Size( max = 45)
-    private double risco;
-    private Long idgerente;
+    private String risco;
+    private Boolean idgerente;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "idpessoa", referencedColumnName = "id", nullable = false)
