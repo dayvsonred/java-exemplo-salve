@@ -2,6 +2,7 @@ package com.core.service;
 
 import com.core.dto.PessoaDto;
 import com.core.dto.ProjetoDto;
+import com.core.dto.ProjetoStatusEnum;
 import com.core.entities.Pessoa;
 import com.core.entities.Projeto;
 import com.core.entities.User;
@@ -28,6 +29,9 @@ public class ProjetoService {
 
     @Autowired
     private ProjetoRepository projetoRepository;
+
+    @Autowired
+    private PessoaService pessoaService;
 
     public Projeto findById(Long projetoId){
         try {
@@ -67,12 +71,19 @@ public class ProjetoService {
     public void deleteProjeto(Long projetoId){
         try {
             Projeto projeto = this.findById(projetoId);
-
+            //Se um projeto foi mudado o status para iniciado, em andamento ou encerrado não pode mais ser excluído
+            if(projeto.getStatus().equals(ProjetoStatusEnum.INICIADO) ||
+                    projeto.getStatus().equals(ProjetoStatusEnum.EM_ANDAMENTO) ||
+                    projeto.getStatus().equals(ProjetoStatusEnum.ENCERRADO)
+            ){
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                        "ERROR this project is not allowed to delete with status : " + projeto.getStatus());
+            }
             projetoRepository.delete(projeto);
         }catch (Exception e){
             log.error(e.getMessage());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    "ERROR on create new projeto to ID: " + projetoId);
+                    "ERROR on delete projeto to ID: " + projetoId);
         }
     }
 
@@ -97,6 +108,25 @@ public class ProjetoService {
             log.error(n.getMessage());
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                      "ERROR Not found projeto in DB with id: " + projetoDto.getId());
+        }catch (Exception e){
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "ERROR on Update new projeto to projetoDto: " + projetoDto.getId());
+        }
+    }
+
+    public Projeto addMembroToProjeto(ProjetoDto projetoDto, Long pessoaId){
+        try {
+            Projeto projeto = this.findById(projetoDto.getId());
+            Pessoa pessoa = pessoaService.findPessoaForAddProjeto(pessoaId);
+
+            projeto.getMembros().add(pessoa);
+
+            return projetoRepository.save(projeto);
+        }catch (ResponseStatusException n){
+            log.error(n.getMessage());
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "ERROR Not found projeto in DB with id: " + projetoDto.getId());
         }catch (Exception e){
             log.error(e.getMessage());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,

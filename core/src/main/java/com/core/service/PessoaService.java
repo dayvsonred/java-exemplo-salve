@@ -97,4 +97,25 @@ public class PessoaService {
                     "ERROR on find pages of Pessoa this page: " + page);
         }
     }
+
+    public Pessoa findPessoaForAddProjeto(Long pessoaId){
+        try {
+            Pessoa pessoa = pessoaRepository.findById(pessoaId).orElseThrow(
+                    () -> new NotFoundException("Not Found PessoaId")
+            );
+            //O sistema deve permitir associar membros aos projetos que tem atribuição funcionário
+            if(pessoa.getFuncionario()){
+                return pessoa;
+            }
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "ERROR Not pessoa not is a funcionario id: " + pessoaId);
+        }catch (NotFoundException e){
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "ERROR Not found pessoaId in DB with id: " + pessoaId);
+        }catch (Exception e){
+            log.error(e.getMessage());
+            throw new RuntimeException("ERROR In find pessoaId in DB with id: " + pessoaId);
+        }
+    }
 }

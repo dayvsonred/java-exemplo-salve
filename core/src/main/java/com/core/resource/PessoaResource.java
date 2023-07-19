@@ -47,7 +47,7 @@ public class PessoaResource {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping
+    @PostMapping
     public ResponseEntity<Pessoa> createPessoa(
             @RequestBody @Valid PessoaDto pessoaDto
     ) {

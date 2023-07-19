@@ -22,6 +22,6 @@ public class Pessoa implements Serializable {
     private String nome;
     private LocalDate datanascimento;
     private String cpf;
-    private boolean funcionario;
+    private Boolean funcionario;
 
 }

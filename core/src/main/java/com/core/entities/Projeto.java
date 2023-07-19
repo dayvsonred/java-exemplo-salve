@@ -1,5 +1,6 @@
 package com.core.entities;
 
+import com.core.dto.ProjetoStatusEnum;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
@@ -29,13 +30,14 @@ public class Projeto implements Serializable {
     @Column(length = 50000, columnDefinition = "TEXT")
     private String descricao;
     @Size( max = 45)
-    private String status;
+    private ProjetoStatusEnum status;
     private double orcamento;
     @Size( max = 45)
     private double risco;
     private Long idgerente;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "idprojeto")
-    private List<Membros> membros;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idpessoa", referencedColumnName = "id", nullable = false)
+    private List<Pessoa> membros;
 
 }

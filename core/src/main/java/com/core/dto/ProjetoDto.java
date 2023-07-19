@@ -1,9 +1,8 @@
 package com.core.dto;
 
-import com.core.entities.Membros;
+import com.core.entities.Pessoa;
 import lombok.*;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -28,11 +27,11 @@ public class ProjetoDto {
     @Size( max = 50000)
     private String descricao;
     @Size( max = 45)
-    private String status;
+    private ProjetoStatusEnum status;
     private double orcamento;
     @Size( max = 45)
     private double risco;
     @NotNull(message = "idgerente may not be null")
     private Long idgerente;
-    private List<Membros> membros;
+    private List<Pessoa> membros;
 }

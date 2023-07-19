@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "TB_MEMBROS", schema = "jsf")
-public class Membros implements Serializable {
+@Table(name = "TB_MEMBROS_eeeeee", schema = "jsf")
+public class MembrosRemover implements Serializable {
 
     @Id
     private Long idprojeto;

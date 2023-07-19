@@ -46,10 +46,25 @@ public class ProjetoResource {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping
+    @PostMapping
     public ResponseEntity<Projeto> create(
             @RequestBody @Valid ProjetoDto projetoDto
     ) {
         return ResponseEntity.ok(projetoService.createNewProjeto(projetoDto));
+    }
+
+    @PutMapping
+    public ResponseEntity<Projeto> update(
+            @RequestBody @Valid ProjetoDto projetoDto
+    ) {
+        return ResponseEntity.ok(projetoService.updateProjeto(projetoDto));
+    }
+
+    @PostMapping(value = "/add/membro/{idPessoa}")
+    public ResponseEntity<Projeto> update(
+            @RequestBody @Valid ProjetoDto projetoDto,
+            @PathVariable Long idPessoa
+    ) {
+        return ResponseEntity.ok(projetoService.addMembroToProjeto(projetoDto, idPessoa));
     }
 }
