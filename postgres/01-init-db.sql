@@ -1,1 +1,1 @@
-CREATE DATABASE marina_test-docker;
+CREATE DATABASE marina_test_jsf;

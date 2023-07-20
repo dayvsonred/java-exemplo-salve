@@ -2,9 +2,9 @@ version: "3.5"
 
 services:
 
-  dbpostgres:
+  dbpostgres_jsf:
     image: postgres:12.0-alpine
-    container_name: dbpostgres
+    container_name: dbpostgres_jsf
     volumes:
       - ./postgres/01-init-db.sql:/docker-entrypoint-initdb.d/01-init-db.sql
     environment:
@@ -20,7 +20,7 @@ services:
   registereureka:
     container_name: registereureka
     depends_on:
-      - dbpostgres
+      - dbpostgres_jsf
     build:
       context: ./register
       dockerfile: Dockerfile
@@ -35,7 +35,7 @@ services:
     container_name: oauth_spring_boot
     depends_on:
       - registereureka
-      - dbpostgres
+      - dbpostgres_jsf
     build:
       context: ./oauth
       dockerfile: Dockerfile
@@ -53,7 +53,7 @@ services:
     container_name: gateway_spring_boot
     depends_on:
       - registereureka
-      - dbpostgres
+      - dbpostgres_jsf
     build:
       context: ./gateway
       dockerfile: Dockerfile
@@ -70,7 +70,7 @@ services:
   core:
     container_name: core_spring_boot
     depends_on:
-      - dbpostgres
+      - dbpostgres_jsf
       - registereureka
     build:
       context: ./core
@@ -80,7 +80,7 @@ services:
     ports:
       - 5055:5055
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://dbpostgres:5432/marina_test?createDatabaseIfNotExist=true&useSSL=false
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://dbpostgres_jsf:5432/marina_test_jsf?createDatabaseIfNotExist=true&useSSL=false
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=toor
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
