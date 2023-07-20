@@ -3,6 +3,7 @@ package com.core.service;
 import com.core.dto.PessoaDto;
 import com.core.dto.ProjetoDto;
 import com.core.dto.ProjetoStatusEnum;
+import com.core.entities.Membros;
 import com.core.entities.Pessoa;
 import com.core.entities.Projeto;
 import com.core.entities.User;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -102,6 +104,9 @@ public class ProjetoService {
             projeto.setOrcamento(projetoDto.getOrcamento());
             projeto.setStatus(projetoDto.getStatus());
 
+            List<Pessoa> membros = pessoaService.findListPessoainProjeto(projeto.getId());
+
+            projeto.setMembros(membros);
 
             return projetoRepository.save(projeto);
         }catch (ResponseStatusException n){

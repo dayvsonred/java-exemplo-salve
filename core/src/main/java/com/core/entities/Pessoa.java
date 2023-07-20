@@ -1,12 +1,12 @@
 package com.core.entities;
 
 import lombok.*;
-import org.hibernate.proxy.HibernateProxy;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Objects;
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -23,7 +23,8 @@ public class Pessoa implements Serializable {
     private LocalDate datanascimento;
     private String cpf;
     private Boolean funcionario;
-    @ManyToOne
-    private Projeto projeto;
+
+    @OneToMany(mappedBy = "idpessoa", fetch = FetchType.EAGER)
+    private List<Membros> membros;
 
 }

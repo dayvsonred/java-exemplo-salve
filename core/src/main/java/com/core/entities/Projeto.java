@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -32,10 +33,14 @@ public class Projeto implements Serializable {
     private ProjetoStatusEnum status;
     private double orcamento;
     private String risco;
-    private Boolean idgerente;
+    @NotNull
+    private Long idgerente;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "idpessoa", referencedColumnName = "id", nullable = false)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "TB_MEMBOS",  schema = "jsf",
+            joinColumns = @JoinColumn(name = "idprojeto"),
+            inverseJoinColumns = @JoinColumn(name = "idpessoa")
+    )
     private List<Pessoa> membros;
 
 }

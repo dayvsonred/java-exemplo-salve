@@ -26,6 +26,6 @@ public class ProjetoDto {
     private ProjetoStatusEnum status;
     private double orcamento;
     private String risco;
-    private Boolean idgerente;
+    private Long idgerente;
     private List<Pessoa> membros;
 }

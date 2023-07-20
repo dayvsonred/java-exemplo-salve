@@ -14,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @Slf4j
 @Service
 public class PessoaService {
@@ -98,6 +100,28 @@ public class PessoaService {
         }
     }
 
+    public Page<Pessoa> findAllPessoaToLink(Integer page, Integer linesPerPage, Long idProjeto){
+        try {
+            Pageable paging = PageRequest.of(page, linesPerPage);
+            return pessoaRepository.allPessoaWithPagination(paging, idProjeto);
+        }catch (Exception e){
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "ERROR on find pages of Pessoa this page: " + page);
+        }
+    }
+
+    public Page<Pessoa> findAllPessoaInProject(Integer page, Integer linesPerPage, Long idProjeto){
+        try {
+            Pageable paging = PageRequest.of(page, linesPerPage);
+            return pessoaRepository.allPessoaInProjectWithPagination(paging, idProjeto);
+        }catch (Exception e){
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "ERROR on find pages of Pessoa this page: " + page);
+        }
+    }
+
     public Pessoa findPessoaForAddProjeto(Long pessoaId){
         try {
             Pessoa pessoa = pessoaRepository.findById(pessoaId).orElseThrow(
@@ -118,4 +142,15 @@ public class PessoaService {
             throw new RuntimeException("ERROR In find pessoaId in DB with id: " + pessoaId);
         }
     }
+
+    public List<Pessoa> findListPessoainProjeto(Long projetoId){
+        try {
+            return pessoaRepository.listPessoaInProjectWithPagination(projetoId);
+        }catch (Exception e){
+            log.error(e.getMessage());
+            throw new RuntimeException("ERROR In find pessoa in projetoId: " + projetoId);
+        }
+    }
+
+
 }

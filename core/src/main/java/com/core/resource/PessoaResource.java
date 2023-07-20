@@ -28,6 +28,24 @@ public class PessoaResource {
         return ResponseEntity.ok(pessoaService.findAllPessoa(page, linesPerPage));
     }
 
+    @GetMapping(value = "/link/page/{idProjeto}")
+    public ResponseEntity<Page<Pessoa>> linkPageFindAll(
+            @PathVariable Long idProjeto,
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage
+    ) {
+        return ResponseEntity.ok(pessoaService.findAllPessoaToLink(page, linesPerPage, idProjeto));
+    }
+
+    @GetMapping(value = "/project/page/{idProjeto}")
+    public ResponseEntity<Page<Pessoa>> projectPageFindAll(
+            @PathVariable Long idProjeto,
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage
+    ) {
+        return ResponseEntity.ok(pessoaService.findAllPessoaInProject(page, linesPerPage, idProjeto));
+    }
+
     @GetMapping(value = "/find/{id}")
     public ResponseEntity<Pessoa> findPessoa(
             @PathVariable Long id

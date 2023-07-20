@@ -35,7 +35,7 @@ public class ProjetoResource {
         return ResponseEntity.ok(projetoService.findById(id));
     }
 
-    @DeleteMapping
+    @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<HttpStatus> deleting(
             @PathVariable Long id
     ) {

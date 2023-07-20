@@ -45,15 +45,12 @@ INSERT INTO jsf.TB_USER_ROLE (user_id,role_id) VALUES
 	 ('2af448b1-a8b4-403e-8405-2c085f8fe0b6',2),
 	 ('73d26316-2ecf-4bec-9cb9-c334be24ccbf',1);
 
-
 CREATE TABLE jsf.tb_pessoa (
 	id bigserial NOT NULL,
 	cpf varchar(255) NULL,
 	datanascimento date NULL,
 	funcionario bool NULL,
 	nome varchar(255) NULL,
-	projeto_id int8 NULL,
-	idpessoa int8 NOT NULL,
 	CONSTRAINT tb_pessoa_pkey PRIMARY KEY (id)
 );
 
@@ -63,14 +60,20 @@ CREATE TABLE jsf.tb_projeto (
 	data_inicio date NULL,
 	data_previsao_fim date NULL,
 	descricao text NULL,
-	idgerente bool NULL,
+	idgerente int8 NOT NULL,
 	nome varchar(255) NULL,
 	orcamento float8 NOT NULL,
-	risco varchar(45) NULL,
+	risco varchar(255) NULL,
 	status int4 NULL,
 	CONSTRAINT tb_projeto_pkey PRIMARY KEY (id)
 );
 
--- jsf.tb_pessoa foreign keys
-ALTER TABLE jsf.tb_pessoa ADD FOREIGN KEY (projeto_id) REFERENCES jsf.tb_projeto(id);
-ALTER TABLE jsf.tb_pessoa ADD FOREIGN KEY (idpessoa) REFERENCES jsf.tb_projeto(id);
+CREATE TABLE jsf.tb_membos (
+	idprojeto int8 NOT NULL,
+	idpessoa int8 NOT NULL
+);
+
+-- jsf.tb_membos foreign keys
+
+ALTER TABLE jsf.tb_membos ADD FOREIGN KEY (idpessoa) REFERENCES jsf.tb_pessoa(id);
+ALTER TABLE jsf.tb_membos ADD FOREIGN KEY (idprojeto) REFERENCES jsf.tb_projeto(id);
