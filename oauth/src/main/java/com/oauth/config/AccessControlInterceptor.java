@@ -12,10 +12,6 @@ public class AccessControlInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-
-        System.out.println("--------------");
-        //response.setHeader("Access-Control-Allow-Origin", "*");
-
         return true;
     }
 }

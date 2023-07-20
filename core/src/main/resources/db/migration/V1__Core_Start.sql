@@ -68,12 +68,12 @@ CREATE TABLE jsf.tb_projeto (
 	CONSTRAINT tb_projeto_pkey PRIMARY KEY (id)
 );
 
-CREATE TABLE jsf.tb_membos (
+CREATE TABLE jsf.tb_membros (
 	idprojeto int8 NOT NULL,
 	idpessoa int8 NOT NULL
 );
 
--- jsf.tb_membos foreign keys
+-- jsf.tb_membros foreign keys
 
-ALTER TABLE jsf.tb_membos ADD FOREIGN KEY (idpessoa) REFERENCES jsf.tb_pessoa(id);
-ALTER TABLE jsf.tb_membos ADD FOREIGN KEY (idprojeto) REFERENCES jsf.tb_projeto(id);
+ALTER TABLE jsf.tb_membros ADD FOREIGN KEY (idpessoa) REFERENCES jsf.tb_pessoa(id);
+ALTER TABLE jsf.tb_membros ADD FOREIGN KEY (idprojeto) REFERENCES jsf.tb_projeto(id);

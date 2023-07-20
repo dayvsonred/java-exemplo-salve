@@ -37,7 +37,7 @@ public class Projeto implements Serializable {
     private Long idgerente;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "TB_MEMBOS",  schema = "jsf",
+    @JoinTable(name = "TB_MEMBROS",  schema = "jsf",
             joinColumns = @JoinColumn(name = "idprojeto"),
             inverseJoinColumns = @JoinColumn(name = "idpessoa")
     )

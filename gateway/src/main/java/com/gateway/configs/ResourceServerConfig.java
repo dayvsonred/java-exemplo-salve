@@ -31,7 +31,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     private static final String[] OPERATOR = {  "/users/**", "/core/**" };
 
-    //private static final String[] ADMIN = { "/hr-payroll/**", "/hr-user/**", "/actuator/**", "/hr-worker/actuator/**", "/hr-oauth/actuator/**" };
+    //private static final String[] ADMIN = { "/admin/**"};
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
@@ -55,20 +55,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfig = new CorsConfiguration();
         corsConfig.addAllowedOrigin("*");
-        //corsConfig.setAllowedOrigins(Arrays.asList("*"));
         corsConfig.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "PATCH", "OPTIONS"));
-        //corsConfig.setAllowCredentials(true);
         corsConfig.addAllowedHeader("*");
-//        corsConfig.setAllowedHeaders(Arrays.asList("*"));
-//        corsConfig.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "User-Agent"));
-
-        //corsConfig.setAllowedOriginPatterns(Arrays.asList(CorsConfiguration.ALL));
-//        corsConfig.setAllowedHeaders(Arrays.asList("Authorization",
-//                "Content-Type",
-//                "User-Agent",
-//                "Origin", "X-Requested-With", "Accept", "Accept-Encoding", "Accept-Language", "Cache-Control",
-//                "Connection","Content-Length", "Host", "Pragma", "Referer"
-//        ));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", corsConfig);

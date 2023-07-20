@@ -13,7 +13,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(schema = "jsf", name = "TB_MEMBOS")
+@Table(schema = "jsf", name = "TB_MEMBROS")
 public class Membros implements Serializable {
 
     @Id

@@ -26,12 +26,6 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     private JwtTokenStore tokenStore;
 
     private static final String[] PUBLIC = {  "/oauth/**" , "/actuator/**", "/bcrypt/**", "/users/**"  };
-// "/users/**",
-
-//    private static final String[] OPERATOR = { "/resell-users/users/**", };
-
-//    private static final String[] ADMIN = { "/hr-payroll/**", "/hr-user/**", "/actuator/**", "/hr-worker/actuator/**", "/hr-oauth/actuator/**" };
-
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
         resources.tokenStore(tokenStore);
@@ -44,43 +38,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers(PUBLIC).permitAll()
                 .antMatchers(HttpMethod.OPTIONS).permitAll()
                 .antMatchers(HttpMethod.GET).hasAnyRole("OPERATOR", "ADMIN")
-                //.antMatchers(ADMIN).hasRole("ADMIN")
-                //.anyRequest().authenticated();
                 .and().authorizeRequests().antMatchers("/**").authenticated();
-
-//        http.cors().configurationSource(corsConfigurationSource());
     }
-
-//    @Bean
-//    public CorsConfigurationSource corsConfigurationSource() {
-//        CorsConfiguration corsConfig = new CorsConfiguration();
-//        corsConfig.setAllowedOrigins(Arrays.asList("*"));
-        //corsConfig.setAllowedOriginPatterns(Arrays.asList(CorsConfiguration.ALL));
-
-        //corsConfig.addAllowedOriginPattern("*");
-        //corsConfig.addAllowedOrigin("*");
-//        corsConfig.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "PATCH", "OPTIONS"));
-//        corsConfig.addAllowedHeader("*");
-        //corsConfig.setAllowCredentials(true);
-//        corsConfig.setAllowedHeaders(Arrays.asList("Authorization",
-//                "Content-Type",
-//                "User-Agent",
-//                "Origin", "X-Requested-With", "Accept", "Accept-Encoding", "Accept-Language", "Cache-Control",
-//                "Connection","Content-Length", "Host", "Pragma", "Referer"
-//        ));
-        //corsConfig.setAllowedHeaders(Arrays.asList(CorsConfiguration.ALL));
-//
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        source.registerCorsConfiguration("/**", corsConfig);
-//        return source;
-//    }
-
-//    @Bean
-//    public FilterRegistrationBean<CorsFilter> corsFilter() {
-//        FilterRegistrationBean<CorsFilter> bean
-//                = new FilterRegistrationBean<>(new CorsFilter(corsConfigurationSource()));
-//        bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
-//        return bean;
-//    }
 
 }
